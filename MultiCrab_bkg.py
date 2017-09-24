@@ -8,7 +8,7 @@ for line in f:
 	c=line.split()[2]
 	d=line.split()[3]
 	
-	workname='bbDM_bkg_run3'
+	workname='bbDM_bkg'
 	
 	if len(a)>100:
 		reqname=a[0:100]
