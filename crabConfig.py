@@ -18,7 +18,7 @@ config.JobType.psetName = 'treeMaker_Summer16_cfg.py'
 config.JobType.maxMemoryMB = 2400
 config.JobType.maxJobRuntimeMin = 2800
 config.JobType.inputFiles = ['effAreaElectrons_cone03_pfNeuHadronsAndPhotons_25ns.txt','effAreasMuons_cone03_Spring15_25ns.txt',
-'../TreeMaker/data/BoostedSVDoubleCA15_withSubjet_v4.weights.xml',
+'BoostedSVDoubleCA15_withSubjet_v4.weights.xml',
 'Summer16_23Sep2016V3_MC_Uncertainty_AK8PFchs.txt',
 'Summer16_23Sep2016V3_MC_Uncertainty_AK8PFPuppi.txt',
 'Summer16_23Sep2016V3_MC_Uncertainty_AK4PFchs.txt',
