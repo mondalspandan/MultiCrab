@@ -11,6 +11,6 @@ for fold1 in listfolders:
         for filename in filelist:
             filestr += os.path.join(folder, fold1, fold2)+"/"+filename + " "
         os.system("mkdir -p BROutputs/"+fold1)
-        command = "hadd BROutputs/"+fold1+"/"+fold2+".root "+filestr
+        command = "hadd BROutputs/"+fold1+"/Output_"+fold2+".root "+filestr
         os.system(command)
 #        print command+"\n"
