@@ -1,0 +1,7 @@
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0000 bkg_run4_4.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0001 bkg_run4_5.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0002 bkg_run4_6.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0003 bkg_run4_7.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0000 bkg_run4_8.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0001 bkg_run4_9.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0002 bkg_run4_10.txt
