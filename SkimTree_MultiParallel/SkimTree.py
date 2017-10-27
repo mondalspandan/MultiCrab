@@ -10,17 +10,17 @@ import numpy as numpy_
 ROOT.gROOT.LoadMacro("Loader.h+")
 
 #to find which sample is being used
-def WhichSample(filename):
-    samplename = 'all'
-    if filename.find('WJets')>-1:
-        samplename = 'WJETS'
-    elif filename.find('ZJets')>-1:
-        samplename = 'ZJETS'
-    elif filename.find('TT')>-1:
-        samplename  = 'TT'
-    else:
-        samplename = 'all'
-    return samplename   
+#def WhichSample(filename):
+#    samplename = 'all'
+#    if filename.find('WJets')>-1:
+#        samplename = 'WJETS'
+#    elif filename.find('ZJets')>-1:
+#        samplename = 'ZJETS'
+#    elif filename.find('TT')>-1:
+#        samplename  = 'TT'
+#    else:
+#        samplename = 'all'
+#    return samplename   
     
     
 ## When not running on farmout
@@ -42,7 +42,7 @@ skimmedTree = TChain("tree/treeMaker")
 #    samplename = WhichSample(inputfilename)
 ##======use this for providing list of file======##
 skimmedTree.Add(sys.argv[1])
-samplename = WhichSample(sys.argv[1])
+#samplename = WhichSample(sys.argv[1])
 
     
 def AnalyzeDataSet():
@@ -302,9 +302,9 @@ def AnalyzeDataSet():
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
         
-        if samplename=="all":
-           pfmetstatus = ( pfMet > 200.0 )
-           if pfmetstatus == False : continue
+#        if samplename=="all":
+        pfmetstatus = ( pfMet > 200.0 )
+#           if pfmetstatus == False : continue
          
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -477,15 +477,15 @@ def AnalyzeDataSet():
                 ZmumuMass[0] = mumu_mass
                 
         ## hardrecoil cut for ZJETS sample
-        if samplename == "ZJETS":
-            if len(myEles) ==2:
-                ZRecoilstatus =(ZeeRecoil > 200)                
-            elif len(myMuos) ==2:
-                ZRecoilstatus =(ZmumuRecoil > 200)
-            else:
-                ZRecoilstatus=False
-            print(samplename,ZRecoilstatus)
-            if ZRecoilstatus == False : continue
+#        if samplename == "ZJETS":
+        if len(myEles) ==2:
+            ZRecoilstatus =(ZeeRecoil[0] > 200)                
+        elif len(myMuos) ==2:
+            ZRecoilstatus =(ZmumuRecoil[0] > 200)
+        else:
+            ZRecoilstatus=False
+#         print(samplename,ZRecoilstatus)
+#         if ZRecoilstatus == False : continue
         
         ## for Single electron  
         if len(myEles) == 1:
@@ -522,15 +522,15 @@ def AnalyzeDataSet():
            Wmunumass[0] = mu_mass
            
         ## hardrecoil cut for WJETS sample
-        if samplename == "WJETS":
-            if len(myEles) == 1:
-                WRecoilstatus =(WenuRecoil > 200)
-            elif len(myMuos) == 1:
-                WRecoilstatus =(WmunuRecoil > 200)
-            else:
-                WRecoilstatus=False
-            print(samplename,WRecoilstatus) 
-            if WRecoilstatus == False : continue
+#        if samplename == "WJETS":
+        if len(myEles) == 1:
+            WRecoilstatus =(WenuRecoil[0] > 200)
+        elif len(myMuos) == 1:
+            WRecoilstatus =(WmunuRecoil[0] > 200)
+        else:
+            WRecoilstatus=False
+#            print(samplename,WRecoilstatus) 
+#            if WRecoilstatus == False : continue
          
          
         ## for Single electron && Single Muon
@@ -549,9 +549,12 @@ def AnalyzeDataSet():
            TOPRecoil[0] =  math.sqrt(TOPenumunuRecoilPx * TOPenumunuRecoilPx  +  TOPenumunuRecoilPy*TOPenumunuRecoilPy)
            
          
-        if samplename == "TT": #hardrecoil cut for TTbar sample
-            TOPRecoilstatus =(TOPRecoil > 200)
-            if TOPRecoilstatus == False : continue
+#        if samplename == "TT": #hardrecoil cut for TTbar sample
+        TOPRecoilstatus =(TOPRecoil[0] > 200)
+#            if TOPRecoilstatus == False : continue
+        
+        if pfmetstatus==False and ZRecoilstatus==False and WRecoilstatus==False and TOPRecoilstatus==False:
+            continue
          
         outTree.Fill()
 
