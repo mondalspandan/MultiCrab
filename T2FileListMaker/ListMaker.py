@@ -1,7 +1,10 @@
-f=open("BkgRun3Dir.txt","r")
+import os
+os.system("mkdir -p Filelist")
+
+f=open("SkimmedTreesList.txt","r")
+filepref="SkimmedTrees_"
 
 pref="root://se01.indiacms.res.in:1094/"
-filepref="bkg_run3_"
 filecount=1
 lineminus1=""
 lineminus2=""
@@ -16,7 +19,9 @@ for line in f:
 		
 	if fname.endswith(".root") and not fileopen:
 		folder=pref+lineminus2[:-2]+"/"
-		log.write(lineminus2.split("/")[-3]+" "+filepref+str(filecount)+".txt\n")
+#		print lineminus2
+#        log.write(lineminus2.split("/")[-3]+" "+filepref+str(filecount)+".txt\n")          # For making a list of CRAB job outputs
+		log.write(lineminus2.split("/")[-1][:-2]+" "+filepref+str(filecount)+".txt\n")      # For making a list of SkimmedTrees
 		out=open("Filelist/"+filepref+str(filecount)+".txt","w")		
 		out.write(folder+fname+"\n")
 		filecount+=1
