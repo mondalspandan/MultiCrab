@@ -35,6 +35,7 @@ class MonoHbbQuantities:
         self.jet2_pT_sr1     = -999.
         self.jet2_eta_sr1    = -999.
         self.jet2_phi_sr1    = -999.
+        self.min_dPhi_sr1    = -999.
         self.jet1_pT_sr2     = -999.
         self.jet1_eta_sr2    = -999.
         self.jet1_phi_sr2    = -999.
@@ -44,6 +45,7 @@ class MonoHbbQuantities:
         self.jet3_pT_sr2     = -999.
         self.jet3_eta_sr2    = -999.
         self.jet3_phi_sr2    = -999.
+        self.min_dPhi_sr2    = -999.
         
         self.presel_jet1_csv_sr1    = -999.
         self.presel_jet2_csv_sr1    = -999.
@@ -276,6 +278,7 @@ class MonoHbbQuantities:
         self.h_jet2_pT_sr1     = []
         self.h_jet2_eta_sr1    = []
         self.h_jet2_phi_sr1    = []
+        self.h_min_dPhi_sr1    = []
         self.h_jet1_pT_sr2     = []
         self.h_jet1_eta_sr2    = []
         self.h_jet1_phi_sr2    = []
@@ -285,6 +288,7 @@ class MonoHbbQuantities:
         self.h_jet3_pT_sr2     = []
         self.h_jet3_eta_sr2    = []
         self.h_jet3_phi_sr2    = []
+        self.h_min_dPhi_sr2    = []
         
         self.h_presel_jet1_csv_sr1    = []
         self.h_presel_jet2_csv_sr1    = []
@@ -544,6 +548,7 @@ class MonoHbbQuantities:
         self.h_jet2_pT_sr1.append(TH1F('h_jet2_pT_sr1_','h_jet2_pT_sr1_',1000,0.,1000.))
         self.h_jet2_eta_sr1.append(TH1F('h_jet2_eta_sr1_','h_jet2_eta_sr1_',70, -3.5, 3.5))
         self.h_jet2_phi_sr1.append(TH1F('h_jet2_phi_sr1_','h_jet2_phi_sr1_',70, -3.5, 3.5))
+        self.h_min_dPhi_sr1.append(TH1F('h_min_dPhi_sr1_','h_min_dPhi_sr1_',63, 0, 3.1416))
         self.h_jet1_pT_sr2.append(TH1F('h_jet1_pT_sr2_','h_jet1_pT_sr2_',1000,0.,1000.))
         self.h_jet1_eta_sr2.append(TH1F('h_jet1_eta_sr2_','h_jet1_eta_sr2_',70, -3.5, 3.5))
         self.h_jet1_phi_sr2.append(TH1F('h_jet1_phi_sr2_','h_jet1_phi_sr2_',70, -3.5, 3.5))
@@ -553,6 +558,7 @@ class MonoHbbQuantities:
         self.h_jet3_pT_sr2.append(TH1F('h_jet3_pT_sr2_','h_jet3_pT_sr2_',1000,0.,1000.))
         self.h_jet3_eta_sr2.append(TH1F('h_jet3_eta_sr2_','h_jet3_eta_sr2_',70, -3.5, 3.5))
         self.h_jet3_phi_sr2.append(TH1F('h_jet3_phi_sr2_','h_jet3_phi_sr2_',70, -3.5, 3.5))
+        self.h_min_dPhi_sr2.append(TH1F('h_min_dPhi_sr2_','h_min_dPhi_sr2_',63, 0, 3.1416))
         self.h_jet1_csv_sr1.append(TH1F('h_jet1_csv_sr1_','h_jet1_csv_sr1_',100, 0,1.05))
         self.h_jet2_csv_sr1.append(TH1F('h_jet2_csv_sr1_','h_jet2_csv_sr1_',100, 0,1.05))
         self.h_jet1_csv_sr2.append(TH1F('h_jet1_csv_sr2_','h_jet1_csv_sr2_',100, 0,1.05))
@@ -829,6 +835,7 @@ class MonoHbbQuantities:
         if self.jet2_pT_sr1 is not None:    self.h_jet2_pT_sr1[0]    .Fill(self.jet2_pT_sr1,   WF)
         if self.jet2_eta_sr1 is not None:   self.h_jet2_eta_sr1[0]   .Fill(self.jet2_eta_sr1,  WF)
         if self.jet2_phi_sr1 is not None:   self.h_jet2_phi_sr1[0]   .Fill(self.jet2_phi_sr1,  WF)
+        if self.min_dPhi_sr1 is not None:   self.h_min_dPhi_sr1[0]   .Fill(self.min_dPhi_sr1,  WF)
         
         if self.jet1_pT_sr2 is not None:    self.h_jet1_pT_sr2[0]    .Fill(self.jet1_pT_sr2,   WF)
         if self.jet1_eta_sr2 is not None:   self.h_jet1_eta_sr2[0]   .Fill(self.jet1_eta_sr2,  WF)
@@ -839,6 +846,7 @@ class MonoHbbQuantities:
         if self.jet3_pT_sr2 is not None:    self.h_jet3_pT_sr2[0]    .Fill(self.jet3_pT_sr2,   WF)
         if self.jet3_eta_sr2 is not None:   self.h_jet3_eta_sr2[0]   .Fill(self.jet3_eta_sr2,  WF)
         if self.jet3_phi_sr2 is not None:   self.h_jet3_phi_sr2[0]   .Fill(self.jet3_phi_sr2,  WF)
+        if self.min_dPhi_sr2 is not None:   self.h_min_dPhi_sr2[0]   .Fill(self.min_dPhi_sr2,  WF)
         
         if self.jet1_csv_sr1 is not None:    self.h_jet1_csv_sr1[0]    .Fill(self.jet1_csv_sr1,   WF)
         if self.jet2_csv_sr1 is not None:    self.h_jet2_csv_sr1[0]    .Fill(self.jet2_csv_sr1,   WF)
@@ -1061,7 +1069,7 @@ class MonoHbbQuantities:
         if self.jet2_csv_TOPcr2 is not None:    self.h_jet2_csv_TOPcr2[0]    .Fill(self.jet2_csv_TOPcr2,   WF)
         if self.jet3_csv_TOPcr2 is not None:    self.h_jet3_csv_TOPcr2[0]    .Fill(self.jet3_csv_TOPcr2,   WF)
         
-    def WriteHisto(self, (nevts,nevts_weight,cutflowvalues,cutflownames,CRvalues,CRnames)):
+    def WriteHisto(self, (nevts,nevts_weight,cutflowvalues,cutflownames,cutflowvaluesSR1,cutflownamesSR1,cutflowvaluesSR2,cutflownamesSR2,CRvalues,CRnames)):
         f = TFile(self.rootfilename,'RECREATE')
         print 
         f.cd()
@@ -1077,6 +1085,20 @@ class MonoHbbQuantities:
             self.h_cutflow.GetXaxis().SetBinLabel(icutflow+1,cutflownames[icutflow])
             self.h_cutflow.SetBinContent(icutflow+1,cutflowvalues[icutflow])
         self.h_cutflow.Write()
+        
+        ncutflowSR1=len(cutflowvaluesSR1)
+        self.h_cutflowSR1=TH1F('h_cutflow_SR1_','h_cutflow_SR1_',ncutflowSR1, 0, ncutflowSR1)                          # Cutflow         
+        for icutflow in range(len(cutflowvaluesSR1)):
+            self.h_cutflowSR1.GetXaxis().SetBinLabel(icutflow+1,cutflownamesSR1[icutflow])
+            self.h_cutflowSR1.SetBinContent(icutflow+1,cutflowvaluesSR1[icutflow])
+        self.h_cutflowSR1.Write()
+        
+        ncutflowSR2=len(cutflowvaluesSR2)
+        self.h_cutflowSR2=TH1F('h_cutflow_SR2_','h_cutflow_SR2_',ncutflowSR2, 0, ncutflowSR2)                          # Cutflow         
+        for icutflow in range(len(cutflowvaluesSR2)):
+            self.h_cutflowSR2.GetXaxis().SetBinLabel(icutflow+1,cutflownamesSR2[icutflow])
+            self.h_cutflowSR2.SetBinContent(icutflow+1,cutflowvaluesSR2[icutflow])
+        self.h_cutflowSR2.Write()
         
         nCR=len(CRvalues)
         self.h_CRs=TH1F('h_CRs_','h_CRs_',nCR, 0, nCR)                          # CR flow         
@@ -1114,6 +1136,7 @@ class MonoHbbQuantities:
         self.h_jet2_pT_sr1[0].Write()
         self.h_jet2_eta_sr1[0].Write()
         self.h_jet2_phi_sr1[0].Write()
+        self.h_min_dPhi_sr1[0].Write()
         self.h_jet1_pT_sr2[0].Write()
         self.h_jet1_eta_sr2[0].Write()
         self.h_jet1_phi_sr2[0].Write()
@@ -1123,6 +1146,7 @@ class MonoHbbQuantities:
         self.h_jet3_pT_sr2[0].Write()
         self.h_jet3_eta_sr2[0].Write()
         self.h_jet3_phi_sr2[0].Write()
+        self.h_min_dPhi_sr2[0].Write()
         
         self.h_jet1_csv_sr1[0].Write()
         self.h_jet2_csv_sr1[0].Write()

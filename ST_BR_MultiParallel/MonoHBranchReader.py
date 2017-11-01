@@ -185,6 +185,8 @@ def AnalyzeDataSet():
     npass = 0
     #print [rootfilename, NEntries]
     cutStatus={'preselection':NEntries}
+    cutStatusSR1={'preselection':NEntries}
+    cutStatusSR2={'preselection':NEntries}
     
 #    cutStatus['trigger'] = 0
 #    cutStatus['filter'] = 0
@@ -207,6 +209,24 @@ def AnalyzeDataSet():
 #    cutStatus['eleveto'] = 0
 #    cutStatus['muveto'] = 0
 #    cutStatus['tauveto'] = 0
+
+    cutStatusSR1['njet'] = 0
+    cutStatusSR1['jet1'] = 0
+    cutStatusSR1['jet2'] = 0
+    cutStatusSR1['btaggedjet'] = 0
+    
+    cutStatusSR2['njet'] = 0
+    cutStatusSR2['jet1pT'] = 0
+    cutStatusSR2['jet1phi'] = 0
+    cutStatusSR2['jet2pT'] = 0
+    cutStatusSR2['jet2phi'] = 0
+    cutStatusSR2['jet3pT'] = 0
+    cutStatusSR2['jet3phi'] = 0
+    cutStatusSR2['jet1'] = 0
+    cutStatusSR2['jet2'] = 0
+    cutStatusSR2['jet3'] = 0
+    cutStatusSR2['btaggedjet1'] = 0
+    cutStatusSR2['btaggedjet2'] = 0
     
     CRs=['ZCRSR1','ZCRSR2','WCRSR1','WCRSR2','TopCRSR1','TopCRSR2']
     
@@ -367,8 +387,10 @@ def AnalyzeDataSet():
         
         if nTHINJets == 2:
             inSR1=True
+            if pfmetstatus: cutStatusSR1['njet'] +=1
         elif nTHINJets == 3:
             inSR2=True
+            if pfmetstatus: cutStatusSR2['njet'] +=1
         else:
             continue 
         
@@ -400,11 +422,13 @@ def AnalyzeDataSet():
             if thinjetChadEF[ifirstjet]< 0.1: continue
             
             if pfmetstatus: cutStatus['jet1'] += 1              # Lead jet satisfies required criteria
+            if pfmetstatus: cutStatusSR1['jet1'] +=1
                             
             if j2.Pt() < 30.0: continue
-            if DeltaPhi(j1.Phi(),pfMetPhi) < 0.5: continue
+            if DeltaPhi(j2.Phi(),pfMetPhi) < 0.5: continue
             
             if pfmetstatus: cutStatus['jet2/3'] += 1           # Jet 2 satisfies the required criteria
+            if pfmetstatus: cutStatusSR1['jet2'] +=1
             
             #===CSVs before any selection===
             allquantities.presel_jet1_csv_sr1=thinJetCSV[ifirstjet]		
@@ -416,6 +440,7 @@ def AnalyzeDataSet():
             if thinJetCSV[ifirstjet] < 0.8: continue            # Lead jet has to be b-tagged
             
             if pfmetstatus: cutStatus['btaggedjet'] += 1         # The b-jet criteria is fulfilled 
+            if pfmetstatus: cutStatusSR1['btaggedjet'] +=1
             
             jet1pt = j1.Pt()
             jet1phi = j1.Phi()
@@ -423,13 +448,16 @@ def AnalyzeDataSet():
             
             jet2pt = j2.Pt()
             jet2phi = j2.Phi()
-            jet2eta = j2.Eta()
+            jet2eta = j2.Eta()            
             
             jet1csv = thinJetCSV[ifirstjet]
             jet2csv = thinJetCSV[isecondjet]
+            
+            min_dPhi=min(DeltaPhi(j1.Phi(),pfMetPhi),DeltaPhi(j2.Phi(),pfMetPhi))
 
             jetSR1Info.append([jet1pt,jet1eta,jet1phi,jet1csv])
             jetSR1Info.append([jet2pt,jet2eta,jet2phi,jet2csv])
+            jetSR1Info.append(min_dPhi)
           
      
      ## for SR2
@@ -452,19 +480,29 @@ def AnalyzeDataSet():
             ithirdjet=sortedindex[2]
             
             if j1.Pt() < 50.0: continue
+            if pfmetstatus: cutStatusSR2['jet1pT'] += 1 
             if DeltaPhi(j1.Phi(),pfMetPhi) < 0.5: continue            
             if thinjetNhadEF[ifirstjet] > 0.8 : continue
             if thinjetChadEF[ifirstjet]< 0.1: continue
             
             if pfmetstatus: cutStatus['jet1'] += 1              # Lead jet satisfies required criteria
             
+            if pfmetstatus: cutStatusSR2['jet1'] += 1
+            if pfmetstatus: cutStatusSR2['jet1phi'] += 1
+            
             if j2.Pt() < 50.0: continue
-            if DeltaPhi(j2.Phi(),pfMetPhi) < 0.5: continue            
-#            if thinjetNhadEF[isecondjet] > 0.8 : continue
-#            if thinjetChadEF[isecondjet]< 0.1: continue
+            if pfmetstatus: cutStatusSR2['jet2pT'] += 1
+            if DeltaPhi(j2.Phi(),pfMetPhi) < 0.5: continue
+            
+            if pfmetstatus: cutStatusSR2['jet2phi'] += 1
+            if pfmetstatus: cutStatusSR2['jet2'] += 1
             
             if j3.Pt() < 30.0: continue
+            if pfmetstatus: cutStatusSR2['jet3pT'] += 1
             if DeltaPhi(j3.Phi(),pfMetPhi) < 0.5: continue
+            if pfmetstatus: cutStatusSR2['jet3phi'] += 1
+            if pfmetstatus: cutStatusSR2['jet3'] += 1
+            
             
             if pfmetstatus: cutStatus['jet2/3'] += 1           # The jets 2 and 3 satisfy the required criteria
             
@@ -479,7 +517,10 @@ def AnalyzeDataSet():
             jet3csv = thinJetCSV[ithirdjet]
             
             if thinJetCSV[ifirstjet] < 0.8: continue            # Lead jet has to be b-tagged
+            if pfmetstatus: cutStatusSR2['btaggedjet1'] += 1
+            
             if thinJetCSV[isecondjet] < 0.8: continue           # Second jet has to be b-tagged
+            if pfmetstatus: cutStatusSR2['btaggedjet2'] += 1
             
             if pfmetstatus: cutStatus['btaggedjet'] += 1         # The b-jet criteria is fulfilled 
             
@@ -498,10 +539,13 @@ def AnalyzeDataSet():
             jet1csv = thinJetCSV[ifirstjet]
             jet2csv = thinJetCSV[isecondjet]
             jet3csv = thinJetCSV[ithirdjet]
+            
+            min_dPhi=min(DeltaPhi(j1.Phi(),pfMetPhi),DeltaPhi(j2.Phi(),pfMetPhi),DeltaPhi(j3.Phi(),pfMetPhi))
 
             jetSR2Info.append([jet1pt,jet1eta,jet1phi,jet1csv])
             jetSR2Info.append([jet2pt,jet2eta,jet2phi,jet2csv])
             jetSR2Info.append([jet3pt,jet3eta,jet3phi,jet3csv])
+            jetSR2Info.append(min_dPhi)
 
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -887,6 +931,7 @@ def AnalyzeDataSet():
            allquantities.jet2_eta_sr1    = jetSR1Info[1][1]
            allquantities.jet2_phi_sr1    = jetSR1Info[1][2]
            allquantities.jet2_csv_sr1    = jetSR1Info[1][3]
+           allquantities.min_dPhi_sr1    = jetSR1Info[2]
            
         elif inSR2:
            allquantities.jet1_pT_sr2     = jetSR2Info[0][0]
@@ -901,6 +946,7 @@ def AnalyzeDataSet():
            allquantities.jet3_eta_sr2    = jetSR2Info[2][1]
            allquantities.jet3_phi_sr2    = jetSR2Info[2][2]
            allquantities.jet3_csv_sr2    = jetSR2Info[2][3]
+           allquantities.min_dPhi_sr2    = jetSR2Info[3]
            
         else:
             continue       
@@ -1079,7 +1125,7 @@ def AnalyzeDataSet():
            allquantities.jet2_eta_TOPcr1    = jetSR1Info[1][1]
            allquantities.jet2_phi_TOPcr1    = jetSR1Info[1][2]
            allquantities.jet2_csv_TOPcr1    = jetSR1Info[1][3]
-           allquantities.TOPRecoil1          = TOPRecoil           # BugFix: hadrecoil is not defined for top
+           allquantities.TOPRecoil1          = TOPRecoil  
            allquantities.mu1_pT_TOPcr1       = TOPmu1pT
            allquantities.el1_pT_TOPcr1       = TOPele1pT
            allquantities.mu1_eta_TOPcr1      = TOPmu1eta
@@ -1122,6 +1168,10 @@ def AnalyzeDataSet():
     NEntries_Weight = h_t_weight.Integral()
     NEntries_total  = h_t.Integral()
     cutStatus['total'] = int(NEntries_total)
+    cutStatusSR1['total'] = int(NEntries_total)
+    cutStatusSR2['total'] = int(NEntries_total)
+    cutStatusSR1['pfmet'] = cutStatus['pfmet']
+    cutStatusSR2['pfmet'] = cutStatus['pfmet']
     print "Total events =", cutStatus['total']
     print "Preselected events=", cutStatus['preselection']
     print "Selected events =", npass
@@ -1136,6 +1186,16 @@ def AnalyzeDataSet():
         cutflowTable += str(cutStatus[cutflowname])+" "
         cutflowHeader += cutflowname+" "    
     
+    cutflowvaluesSR1=[]
+    cutflownamesSR1=['total','preselection','pfmet','njet','jet1','jet2','btaggedjet']
+    for cutflowname in cutflownamesSR1:   
+        cutflowvaluesSR1.append(cutStatusSR1[cutflowname])
+        
+    cutflowvaluesSR2=[]
+    cutflownamesSR2=['total','preselection','pfmet','njet','jet1','jet2','jet3','btaggedjet1','btaggedjet2']
+    for cutflowname in cutflownamesSR2:   
+        cutflowvaluesSR2.append(cutStatusSR2[cutflowname])
+    
     # CR counts
     CRTable=""
     CRHeader=""
@@ -1145,8 +1205,18 @@ def AnalyzeDataSet():
         CRTable += str(CRStatus[CRname])+" "
         CRHeader += CRname+" "
     
+    #Cutflows for SR1 and SR2
+    print "\nCutflow:"
+    print cutStatus
+    print
+    print "SR1:"
+    print cutStatusSR1
+    print
+    print "SR2:"
+    print cutStatusSR2
+    print   
     
-    allquantities.WriteHisto((NEntries_total,NEntries_Weight,cutflowvalues,cutflownames,CRvalues,CRs))
+    allquantities.WriteHisto((NEntries_total,NEntries_Weight,cutflowvalues,cutflownames,cutflowvaluesSR1,cutflownamesSR1,cutflowvaluesSR2,cutflownamesSR2,CRvalues,CRs))
     
     if NEntries > 0:
         eff=round(float(npass/float(NEntries)),5)
@@ -1220,7 +1290,7 @@ def DeltaR(p4_1, p4_2):
 def DeltaPhi(phi1,phi2):
    phi = Phi_mpi_pi(phi1-phi2)
    
-   return phi
+   return abs(phi)
    
     
 def Phi_mpi_pi(x):
