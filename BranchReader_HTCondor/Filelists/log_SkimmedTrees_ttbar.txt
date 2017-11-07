@@ -1,0 +1,7 @@
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0003 SkimmedTrees_ttbar_1.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0002 SkimmedTrees_ttbar_2.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0001 SkimmedTrees_ttbar_3.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_0000 SkimmedTrees_ttbar_4.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0002 SkimmedTrees_ttbar_5.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0001 SkimmedTrees_ttbar_6.txt
+TT_TuneCUETP8M2T4_13TeV-powheg-isrup-pythia8_0000 SkimmedTrees_ttbar_7.txt

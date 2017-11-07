@@ -1,0 +1,2 @@
+GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_MC25ns_LegacyMC_20170328 bkg_run4v2_1.txt
+ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph_MC25ns_LegacyMC_20170328 bkg_run4v2_2.txt
