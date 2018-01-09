@@ -1,0 +1,16 @@
+crab_MET-Run2016H-03Feb2017_ver3-v1 SkimmedTrees_data_MET1.txt
+crab_MET-Run2016H-03Feb2017_ver2-v1_0000 SkimmedTrees_data_MET2.txt
+crab_MET-Run2016H-03Feb2017_ver2-v1_0001 SkimmedTrees_data_MET3.txt
+crab_MET-Run2016H-03Feb2017_ver2-v1_0002 SkimmedTrees_data_MET4.txt
+crab_MET-Run2016G-03Feb2017-v1_0000 SkimmedTrees_data_MET5.txt
+crab_MET-Run2016G-03Feb2017-v1_0001 SkimmedTrees_data_MET6.txt
+crab_MET-Run2016G-03Feb2017-v1_0002 SkimmedTrees_data_MET7.txt
+crab_MET-Run2016F-03Feb2017-v1 SkimmedTrees_data_MET8.txt
+crab_MET-Run2016E-03Feb2017-v11_0000 SkimmedTrees_data_MET9.txt
+crab_MET-Run2016E-03Feb2017-v11_0001 SkimmedTrees_data_MET10.txt
+crab_MET-Run2016D-03Feb2017-v1_0000 SkimmedTrees_data_MET11.txt
+crab_MET-Run2016D-03Feb2017-v1_0001 SkimmedTrees_data_MET12.txt
+crab_MET-Run2016C-03Feb2017-v1 SkimmedTrees_data_MET13.txt
+crab_MET-Run2016B-03Feb2017_ver2-v2_0000 SkimmedTrees_data_MET14.txt
+crab_MET-Run2016B-03Feb2017_ver2-v2_0001 SkimmedTrees_data_MET15.txt
+crab_MET-Run2016B-03Feb2017_ver2-v2_0002 SkimmedTrees_data_MET16.txt

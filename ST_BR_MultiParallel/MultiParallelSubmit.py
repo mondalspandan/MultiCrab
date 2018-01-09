@@ -10,6 +10,8 @@ os.system("chmod +x runAnalysis.sh")
 for outdirs in ['error','log','output']:
     os.system("mkdir -p "+outdirs)
 
+count=1
+
 for foldname in listfolders:
 #    os.system("mkdir -p data/"+foldname)
     run=foldname[9:]
@@ -34,7 +36,10 @@ for foldname in listfolders:
         submittemp.write("queue rootfile from "+inpfilename)
         submittemp.close()
         
-        print "\n===============================\nSubmitting "+inpfilename+": "+ sample[listname]+"\n===============================\n"
+        print "\n===============================\nSubmitting jobs set #"+str(count)+" from "+inpfilename+": "+ sample[listname]+"\n===============================\n"
         
         os.system("condor_submit submit_parallel_temp.sub")
+        count+=1
     logfile.close()
+
+print "\nDone. Submitted "+str(count-1)+" jobs."

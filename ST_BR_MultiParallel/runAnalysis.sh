@@ -16,8 +16,10 @@ cd $CMSSW_BASE
 cmsenv
 cd ../../
 python SkimTree.py "$1"
-python MonoHBranchReader.py -a -i SkimmedTree.root -D .
-xrdcp SkimmedTree.root root://se01.indiacms.res.in//dpm/indiacms.res.in/home/cms/store/user/spmondal/t3store2/bbDM_SkimmedTrees/"$2"/SkimmedTree_"$3".root
+until xrdcp -f SkimmedTree.root root://se01.indiacms.res.in//dpm/indiacms.res.in/home/cms/store/user/spmondal/t3store2/bbDM_SkimmedTrees_bkg_sig_MET/"$2"/SkimmedTree_"$3".root; do
+  sleep 60
+done
+python MonoHBranchReader.py -a -i SkimmedTree.root -D . --csv
 
 exitcode=$?
 
