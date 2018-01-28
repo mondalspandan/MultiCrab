@@ -23,7 +23,7 @@ for line in f:
 #		print lineminus2
 		if lineminus2.split("/")[-1].strip()=="failed:": failedfile=True
 		if not failedfile:
-#			log.write(lineminus2.split("/")[-3]+"_"+lineminus2.split("/")[-2]+" "+filepref+str(filecount)+".txt\n")          # For making a list of CRAB job outputs
+#			log.write(lineminus2.split("/")[-3]+"_"+lineminus2.split("/")[-1][:-2]+" "+filepref+str(filecount)+".txt\n")          # For making a list of CRAB job outputs
 			log.write(lineminus2.split("/")[-1][:-2]+" "+filepref+str(filecount)+".txt\n")      # For making a list of SkimmedTrees
 			out=open("Filelist"+"_"+filepref+"/"+filepref+str(filecount)+".txt","w")		
 			out.write(folder+fname+"\n")
