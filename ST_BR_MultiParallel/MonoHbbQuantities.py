@@ -255,7 +255,7 @@ class MonoHbbQuantities:
             exec("if self."+quant+" is not None: self.h_"+quant+"[0] .Fill(self."+quant+", WF)")
         
        
-    def WriteHisto(self, (nevts,nevts_weight,npass,cutflowvalues,cutflownames,cutflowvaluesSR1,cutflownamesSR1,cutflowvaluesSR2,cutflownamesSR2,CRvalues,CRnames)):
+    def WriteHisto(self, (nevts,nevts_weight,npass,cutflowvalues,cutflownames,cutflowvaluesSR1,cutflownamesSR1,cutflowvaluesSR2,cutflownamesSR2,CRvalues,CRnames,regionnames,CRcutnames,CRcutflowvaluesSet)):
         f = TFile(self.rootfilename,'RECREATE')
         print 
         f.cd()
@@ -288,6 +288,14 @@ class MonoHbbQuantities:
             self.h_cutflowSR2.GetXaxis().SetBinLabel(icutflow+1,cutflownamesSR2[icutflow])
             self.h_cutflowSR2.SetBinContent(icutflow+1,cutflowvaluesSR2[icutflow])
         self.h_cutflowSR2.Write()
+        
+        for ireg in range(len(regionnames)):
+            ncutflowCR=len(CRcutflowvaluesSet[ireg])
+            self.h_cutflowCR=TH1F('h_cutflow_'+regionnames[ireg]+'_','h_cutflow_'+regionnames[ireg]+'_',ncutflowCR, 0, ncutflowCR)  
+            for icutflow in range(len(CRcutflowvaluesSet[ireg])):
+                self.h_cutflowCR.GetXaxis().SetBinLabel(icutflow+1,CRcutnames[icutflow])
+                self.h_cutflowCR.SetBinContent(icutflow+1,CRcutflowvaluesSet[ireg][icutflow])
+            self.h_cutflowCR.Write()
         
         nCR=len(CRvalues)
         self.h_CRs=TH1F('h_CRs_','h_CRs_',nCR, 0, nCR)                          # CR flow         
