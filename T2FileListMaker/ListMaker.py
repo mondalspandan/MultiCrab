@@ -1,16 +1,16 @@
 import os
-os.system("mkdir -p Filelist")
 
-f=open("Filelist_SkimmedTrees_MET_180115.txt","r")
-filepref="SkimmedTrees_MET_180115"
+f=open("SkimmedTrees_signal_180115.txt","r")
+filepref="SkimmedTrees_signal_180115"
 
+os.system("mkdir -p Filelist"+"_"+filepref)
 pref="root://se01.indiacms.res.in:1094/"
 filecount=1
 lineminus1=""
 lineminus2=""
 fileopen=False
 failedfile=False
-log=open("log.txt","w")
+log=open("log_"+filepref+".txt","w")
 
 for line in f:
 	if not line=="\n":
@@ -23,9 +23,9 @@ for line in f:
 #		print lineminus2
 		if lineminus2.split("/")[-1].strip()=="failed:": failedfile=True
 		if not failedfile:
-#			log.write(lineminus2.split("/")[-3]+" "+filepref+str(filecount)+".txt\n")          # For making a list of CRAB job outputs
+#			log.write(lineminus2.split("/")[-3]+"_"+lineminus2.split("/")[-2]+" "+filepref+str(filecount)+".txt\n")          # For making a list of CRAB job outputs
 			log.write(lineminus2.split("/")[-1][:-2]+" "+filepref+str(filecount)+".txt\n")      # For making a list of SkimmedTrees
-			out=open("Filelist/"+filepref+str(filecount)+".txt","w")		
+			out=open("Filelist"+"_"+filepref+"/"+filepref+str(filecount)+".txt","w")		
 			out.write(folder+fname+"\n")
 			filecount+=1
 		fileopen=True
